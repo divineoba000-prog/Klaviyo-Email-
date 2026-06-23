@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GlowSystem · Portfolio Preview</title>
+  <!-- Apple Mail / Outlook / Gmail fixes -->
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light only">
+  <meta name="supported-color-schemes" content="light only">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <style>
+    /* ----- portfolio UI (browser only) ----- */
+    .portfolio-header {
+      text-align: center;
+      font-family: Arial, Helvetica, sans-serif;
+      padding: 25px 15px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .portfolio-header h2 {
+      margin: 0 0 10px 0;
+      color: #2d3748;
+      font-size: 22px;
+    }
+    .portfolio-header img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      margin-top: 15px;
+    }
+    .toggle-panel {
+      text-align: center;
+      background-color: #f8fafc;
+      padding: 20px 15px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .toggle-panel p {
+      margin: 0 0 12px 0;
+      font-family: Arial, sans-serif;
+      color: #4a5568;
+      font-size: 15px;
+    }
+    .toggle-btn {
+      padding: 12px 28px;
+      background-color: #A75A42;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .toggle-btn:hover {
+      background-color: #8c4a35;
+    }
+    .toggle-btn.dark-active {
+      background-color: #1e293b;
+    }
+    .toggle-btn.dark-active:hover {
+      background-color: #0f172a;
+    }
+
+    /* ----- EMAIL ORIGINAL FIXES ----- */
+    .ExternalClass { width:100%; }
+    .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass td, .ExternalClass div { line-height:100%; }
+    table, td { mso-table-lspace:0pt; mso-table-rspace:0pt; }
+    img { -ms-interpolation-mode:bicubic; border:0; display:block; }
+    a { text-decoration:none; }
+
+    /* force Gmail dark mode override */
+    u + .body a,
+    a[x-apple-data-detectors],
+    .cta-button,
+    .cta-button:link,
+    .cta-button:visited {
+      color:#FFFFFF !important;
+      text-decoration:none !important;
+    }
+    .cta-button {
+      background-color:#A75A42 !important;
+      border:1px solid #A75A42 !important;
+      border-radius:8px !important;
+      color:#FFFFFF !important;
+      display:inline-block !important;
+      font-family:Arial, Helvetica, sans-serif !important;
+      font-size:16px !important;
+      font-weight:bold !important;
+      line-height:50px !important;
+      text-align:center !important;
+      text-decoration:none !important;
+      width:260px !important;
+      -webkit-text-size-adjust:none !important;
+    }
+
+    /* responsive */
+    @media only screen and (max-width: 600px) {
+      table[class="email-container"] { width: 100% !important; }
+      td[class="responsive-padding"] { padding-left: 20px !important; padding-right: 20px !important; }
+      img[class="fluid"] { width: 100% !important; height: auto !important; }
+      img[class="logo"] { width: 100px !important; }
+      h2 { font-size: 20px !important; }
+      .cta-button { width: 90% !important; display: block !important; }
+    }
+
+    /* base sim-dark styles (used by JS) – we keep them minimal and let JS handle inline */
+  </style>
+</head>
+<body class="body" style="margin:0; padding:0; background-color:#F7EFEA; font-family:Helvetica, Arial, sans-serif;">
+
+  <!-- ================================================================= -->
+  <!-- PORTFOLIO ELEMENT 1: PROOF PICTURE                                -->
+  <!-- ================================================================= -->
+  <div class="portfolio-header">
+    <h2>📸 Email Visual Proof: Light vs. Dark Mode</h2>
+    <!-- ⬇️ Replace src with your actual screenshot URL (Imgur/ImgBB) -->
+    <img src=" https://files.catbox.moe/inu2ik.jpg" alt="Light and Dark Mode Layout Proof View">
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- PORTFOLIO ELEMENT 2: LIVE SIMULATION TOGGLE                       -->
+  <!-- ================================================================= -->
+  <div class="toggle-panel">
+    <p>⚡ Toggle dark mode simulation on the email below (CSS + table background)</p>
+    <button id="sim-btn" class="toggle-btn" onclick="togglePreview()">
+      🌙 Simulate Email Client Dark Mode
+    </button>
+  </div>
+
+  <!-- ================================================================= -->
+  <!-- MAIN EMAIL WRAPPER (target of simulation)                         -->
+  <!-- ================================================================= -->
+  <div id="email-preview-wrapper" style="background-color:#F7EFEA; padding:0; transition: background 0.3s ease;">
+
+    <!-- spacing fix for Yahoo/Outlook -->
+    <div style="display:none; white-space:nowrap; font-size:0; line-height:0;">&nbsp;</div>
+
+    <center style="width:100%;">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" id="bg-table-1" bgcolor="#F7EFEA" style="background-color:#F7EFEA;">
+        <tr>
+          <td id="bg-td-1" align="center" style="padding:30px 20px; background-color:#F7EFEA;">
+
+            <!-- CONTAINER -->
+            <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"
+              id="main-card"
+              class="email-container"
+              style="width:600px; max-width:600px; background-color:#FFF8F3; border-radius:8px; overflow:hidden;">
+
+              <!-- LOGO -->
+              <tr>
+                <td align="center" style="padding:30px 20px 20px 20px;">
+                  <img
+                    src="https://files.catbox.moe/npc30j.png"
+                    alt="EZLYN Logo"
+                    width="180"
+                    class="logo"
+                    style="width:180px; max-width:180px; height:auto;">
+                </td>
+              </tr>
+
+              <!-- CONTENT -->
+              <tr>
+                <td style="padding:40px 40px 30px 40px; font-size:16px; line-height:1.7; color:#6B5E5A;">
+                  <h2 id="email-heading" style="color:#A75A42; text-align:center; margin:0 0 18px 0; font-size:28px; line-height:1.4;">
+                    You're close — your order is almost complete ⚠️
+                  </h2>
+                  <p class="email-text" style="margin:0 0 18px 0; color:#6B5E5A;">Hi Miracle,</p>
+                  <p class="email-text" style="margin:0 0 18px 0; color:#6B5E5A;">
+                    Your skincare picks are still waiting in your cart, but your checkout hasn't been completed yet. That means your routine — and the results you're looking forward to — are still on pause.
+                  </p>
+                  <p class="email-text" style="margin:0 0 18px 0; color:#6B5E5A;">
+                    The products in your cart aren't reserved permanently, and availability can change at any time. Completing your order now secures your routine and helps you start seeing the difference sooner.
+                  </p>
+                  <p class="email-text" style="margin:0 0 18px 0; color:#6B5E5A;">
+                    With consistency, your skin can begin to feel smoother, look clearer, and develop a healthier natural glow over time. And when your skin feels good, your confidence shows naturally too.
+                  </p>
+                  <ul style="padding-left:20px; margin:0 0 18px 0; color:#6B5E5A;">
+                    <li class="email-text" style="margin-bottom:10px; color:#6B5E5A;">Reveal clearer, healthier-looking skin ✨</li>
+                    <li class="email-text" style="margin-bottom:10px; color:#6B5E5A;">Feel more confident in your appearance 💕</li>
+                    <li class="email-text" style="margin-bottom:10px; color:#6B5E5A;">Secure your selected routine 🛒</li>
+                    <li class="email-text" style="margin-bottom:10px; color:#6B5E5A;">Start your skincare journey today ⚡</li>
+                  </ul>
+                  <p class="email-text" style="margin:0; color:#6B5E5A;">Your cart is still active — but it won't stay that way forever.</p>
+                </td>
+              </tr>
+
+              <!-- PRODUCT IMAGE -->
+              <tr>
+                <td align="center" style="padding:20px 20px 10px 20px;">
+                  <img
+                    src="https://files.catbox.moe/et5dt8.jpg"
+                    alt="EZLYN Product"
+                    width="560"
+                    class="fluid"
+                    style="width:100%; max-width:560px; height:auto; border-radius:6px;">
+                </td>
+              </tr>
+
+              <!-- CTA -->
+              <tr>
+                <td align="center" style="padding:10px 0 0 0;">
+                  <table role="presentation" border="0" cellspacing="0" cellpadding="0">
+                    <tr>
+                      <td align="center" bgcolor="#A75A42" style="border-radius:8px;">
+                        <!--[if mso]>
+                        <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml"
+                        xmlns:w="urn:schemas-microsoft-com:office:word"
+                        href="https://ezlyn.com"
+                        style="height:50px;width:260px;v-text-anchor:middle;"
+                        arcsize="10%"
+                        stroke="f"
+                        fillcolor="#A75A42">
+                        <w:anchorlock/>
+                        <center style="color:#FFFFFF;font-family:Arial, Helvetica, sans-serif;font-size:16px;font-weight:bold;">
+                        Complete My Order ✨
+                        </center>
+                        </v:roundrect>
+                        <![endif]-->
+                        <!--[if !mso]><!-- -->
+                        <a href="https://ezlyn.com" class="cta-button">
+                          Complete My Order ✨
+                        </a>
+                        <!--<![endif]-->
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- PS -->
+              <tr>
+                <td align="center" style="padding:10px 20px 20px 20px;">
+                  <p class="email-text" style="font-style:italic; margin:0; color:#6B5E5A;">
+                    PS: Your cart items are popular right now — once they're gone, they may not be restocked anytime soon 🌿
+                  </p>
+                </td>
+              </tr>
+
+              <!-- FOOTER (with IDs for JS targeting) -->
+              <tr>
+                <td id="email-footer-cell" class="footer" style="padding:25px; background-color:#F3E8E6; line-height:1.6;">
+                  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td id="footer-text-cell" align="center" style="font-size:14px; color:#2A2A2A;">
+                        <p style="margin:5px 0;">You're receiving this email because you subscribed to GlowSystem.</p>
+                        <p style="margin:5px 0;">
+                          <a href="https://glowsystem.com" style="color:#2A2A2A; text-decoration:none;">https://glowsystem.com</a>
+                        </p>
+                        <p style="margin:5px 0;">
+                          <a href="mailto:support@glowsystem.com" style="color:#2A2A2A; text-decoration:none;">support@glowsystem.com</a>
+                        </p>
+                        <p style="margin:5px 0;">
+                          <a href="https://glowsystem.com/unsubscribe" style="color:#2A2A2A" text-decoration:none;">Unsubscribe</a>
+                        </p>
+                        <p style="margin:10px 0 0 0;">© 2026 GlowSystem. All rights reserved.</p>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+            </table>
+            <!-- end container -->
+
+          </td>
+        </tr>
+      </table>
+    </center>
+  </div>
+  <!-- end email-preview-wrapper -->
+
+  <script>
+    function togglePreview() {
+      // grab all elements
+      var wrapper = document.getElementById('email-preview-wrapper');
+      var bgTable = document.getElementById('bg-table-1');
+      var bgTd = document.getElementById('bg-td-1');
+      var mainCard = document.getElementById('main-card');
+      var heading = document.getElementById('email-heading');
+      var footerCell = document.getElementById('email-footer-cell');
+      var footerTextCell = document.getElementById('footer-text-cell');
+      var textElements = document.querySelectorAll('.email-text');
+      var btn = document.getElementById('sim-btn');
+
+      // check current state: if mainCard background is light → switch to dark
+      // we compare against the light hex or rgb value
+      var currentBg = mainCard.style.backgroundColor;
+      // if background is not set or it's light, we go dark
+      if (currentBg === '' || currentBg === 'rgb(255, 248, 243)' || currentBg === '#FFF8F3' || currentBg === '#fff8f3') {
+        // ----- DARK MODE -----
+        wrapper.style.backgroundColor = '#1e1b18';
+        bgTable.style.backgroundColor = '#1e1b18';
+        bgTd.style.backgroundColor = '#1e1b18';
+
+        mainCard.style.backgroundColor = '#2d2522';
+        heading.style.color = '#ff9e7d';
+
+        textElements.forEach(function(el) {
+          el.style.color = '#e2d4cf';
+        });
+
+        footerCell.style.backgroundColor = '#231c1a';
+        footerTextCell.style.color = '#d6c7c2';
+
+        btn.innerText = '☀️ Switch Back to Light Mode';
+        btn.style.backgroundColor = '#2d3748';
+        btn.classList.add('dark-active');
+      } else {
+        // ----- LIGHT MODE (revert) -----
+        wrapper.style.backgroundColor = '#F7EFEA';
+        bgTable.style.backgroundColor = '#F7EFEA';
+        bgTd.style.backgroundColor = '#F7EFEA';
+
+        mainCard.style.backgroundColor = '#FFF8F3';
+        heading.style.color = '#A75A42';
+
+        textElements.forEach(function(el) {
+          el.style.color = '#6B5E5A';
+        });
+
+        footerCell.style.backgroundColor = '#F3E8E6';
+        footerTextCell.style.color = '#2A2A2A';
+
+        btn.innerText = '🌙 Simulate Email Client Dark Mode';
+        btn.style.backgroundColor = '#A75A42';
+        btn.classList.remove('dark-active');
+      }
+    }
+  </script>
+
+</body>
+</html>
